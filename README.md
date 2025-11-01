@@ -84,17 +84,11 @@ The application utilizes the following RESTful endpoints:
 
 ## 📸 Screenshots
 
-# | Products Grid | Cart Summary | Checkout Receipt |
-# | :---: | :---: | :---: |
-# | ![Products List](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/ProductsList.jpg) 
-# | ![Cart View](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/CartViewWithTotal.jpg) 
-# | ![Checkout Receipt](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/ReceiptModal.jpg) |
-
-## 📸 Key Feature Screenshots
-
 | Products Grid | Cart Summary | Checkout Receipt |
 | :---: | :---: | :---: |
-| ![Products List](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/ProductsList.jpg) | ![Cart View](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/CartViewWithTotal.jpg) | ![Checkout Receipt](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/ReceiptModal.jpg) |
+| ![Products List](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/ProductsList.jpg) 
+| ![Cart View](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/CartViewWithTotal.jpg) 
+| ![Checkout Receipt](https://raw.githubusercontent.com/Saloni-developer01/Mock-E-commerce/master/images/ReceiptModal.jpg) |
 
 ---
 
