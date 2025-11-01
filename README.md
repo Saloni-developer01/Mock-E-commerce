@@ -94,5 +94,5 @@ The application utilizes the following RESTful endpoints:
 
 A brief **1-2 minute video demo** covering the application's core functionality: adding, removing items, and completing the checkout process to view the receipt.
 
-**DEMO Video Link (Loom/YouTube Unlisted):**
-`<YOUR_DEMO_VIDEO_LINK_HERE>`
+**Video Link (Loom):**
+`https://www.loom.com/share/0115612cc762456fa772f04ba09c1362`
