@@ -28,6 +28,7 @@ Follow these steps to set up and run the project locally. You must have **Node.j
 git clone https://github.com/Saloni-developer01/Mock-E-commerce.git
 cd vibe-commerce-cart
 
+
 ### 2. Backend Setup (Node/Express)
 
 1.  **Install Dependencies:**
@@ -93,5 +94,5 @@ The application utilizes the following RESTful endpoints:
 
 A brief **1-2 minute video demo** covering the application's core functionality: adding, removing items, and completing the checkout process to view the receipt.
 
-**Video Link (Loom/YouTube Unlisted):**
+**DEMO Video Link (Loom/YouTube Unlisted):**
 `<YOUR_DEMO_VIDEO_LINK_HERE>`
