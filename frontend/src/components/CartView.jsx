@@ -1,132 +1,3 @@
-// // src/components/CartView.jsx
-
-// import React, { useState } from 'react';
-// import API from '../api';
-// import CheckoutModal from './CheckoutModal'; // Next step mein banayenge
-
-// const CartView = ({ cart, fetchCart, setView, setAlert }) => {
-//     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
-
-//     // DELETE /api/cart/:id function
-//     const handleRemoveItem = async (cartItemId) => {
-//         try {
-//             await API.delete(`/cart/${cartItemId}`);
-//             fetchCart(); // Cart refresh karo
-//             setAlert({ message: 'Item removed from cart.', type: 'success' });
-//             setTimeout(() => setAlert(null), 3000);
-//         } catch (error) {
-//             setAlert({ message: 'Failed to remove item.', type: 'error' });
-//             setTimeout(() => setAlert(null), 3000);
-//         }
-//     };
-
-//     if (cart.totalItems === 0) {
-//         return (
-//             <div style={{ textAlign: 'center', padding: '50px', border: '1px dashed #ccc' }}>
-//                 <h2>Your Cart is Empty 🥺</h2>
-//                 <button onClick={() => setView('products')}>Start Shopping</button>
-//             </div>
-//         );
-//     }
-
-//     return (
-//         <div className="cart-view-container">
-//             <h2>🛒 Your Shopping Cart</h2>
-
-//             <div className="cart-items">
-//                 {cart.cartItems.map(item => (
-//                     <div key={item._id} className="cart-item" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 0', borderBottom: '1px solid #eee' }}>
-//                         <div style={{ display: 'flex', alignItems: 'center' }}>
-//                             <img src={item.product.image} alt={item.product.name} style={{ width: '60px', height: '60px', objectFit: 'cover', marginRight: '15px' }} />
-//                             <div>
-//                                 <p style={{ fontWeight: 'bold' }}>{item.product.name}</p>
-//                                 <p>Qty: {item.quantity} x ${item.priceAtAddition.toFixed(2)}</p>
-//                             </div>
-//                         </div>
-//                         <div style={{ textAlign: 'right' }}>
-//                             <p style={{ fontWeight: 'bold' }}>${item.itemTotal.toFixed(2)}</p>
-//                             <button onClick={() => handleRemoveItem(item._id)} style={{ color: 'red', border: 'none', background: 'none', cursor: 'pointer' }}>
-//                                 Remove
-//                             </button>
-//                         </div>
-//                     </div>
-//                 ))}
-//             </div>
-
-//             <div className="cart-summary" style={{ marginTop: '30px', borderTop: '2px solid #333', paddingTop: '15px' }}>
-//                 <p style={{ display: 'flex', justifyContent: 'space-between', fontWeight: 'bold', fontSize: '1.2em' }}>
-//                     <span>Subtotal:</span>
-//                     <span>${cart.subtotal}</span>
-//                 </p>
-
-//                 <button 
-//                     onClick={() => setIsCheckoutOpen(true)}
-//                     style={{ width: '100%', padding: '15px', marginTop: '20px', backgroundColor: '#28a745', color: 'white', border: 'none', cursor: 'pointer', fontSize: '1.1em' }}
-//                 >
-//                     Proceed to Checkout
-//                 </button>
-//             </div>
-
-//             {isCheckoutOpen && (
-//                 <CheckoutModal 
-//                     cartItems={cart.cartItems}
-//                     totalAmount={cart.subtotal}
-//                     onClose={() => setIsCheckoutOpen(false)}
-//                     fetchCart={fetchCart}
-//                     setView={setView}
-//                 />
-//             )}
-//         </div>
-//     );
-// };
-
-// export default CartView;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// src/components/CartView.jsx (Tailwind CSS Update)
-
 import React, { useState } from 'react';
 import API from '../api';
 import CheckoutModal from './CheckoutModal'; 
@@ -134,7 +5,6 @@ import CheckoutModal from './CheckoutModal';
 const CartView = ({ cart, fetchCart, setView, setAlert }) => {
     const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
-    // DELETE /api/cart/:id function
     const handleRemoveItem = async (cartItemId) => {
         try {
             await API.delete(`/cart/${cartItemId}`);
@@ -143,6 +13,24 @@ const CartView = ({ cart, fetchCart, setView, setAlert }) => {
             setTimeout(() => setAlert(null), 3000);
         } catch (error) {
             setAlert({ message: 'Failed to remove item.', type: 'error' });
+            setTimeout(() => setAlert(null), 3000);
+        }
+    };
+
+
+    const handleUpdateQuantity = async (productId, newQty) => {
+        if (newQty <= 0) {
+            
+            setAlert({ message: 'Please use the "Remove" button to delete the item.', type: 'error' });
+            return;
+        }
+
+        try {
+            await API.put(`/cart/${productId}`, { newQty });
+            fetchCart(); 
+
+        } catch (error) {
+            setAlert({ message: 'Failed to update quantity.', type: 'error' });
             setTimeout(() => setAlert(null), 3000);
         }
     };
@@ -166,7 +54,6 @@ const CartView = ({ cart, fetchCart, setView, setAlert }) => {
             <h2 className="text-3xl font-bold mb-8 text-gray-800">🛒 Your Shopping Cart</h2>
 
             <div className="flex flex-col lg:flex-row gap-8">
-                {/* Cart Items List */}
                 <div className="flex-grow lg:w-3/5 bg-white p-4 sm:p-6 rounded-xl shadow-lg border border-gray-100">
                     <div className="space-y-4">
                         {cart.cartItems.map(item => (
@@ -179,7 +66,18 @@ const CartView = ({ cart, fetchCart, setView, setAlert }) => {
                                     />
                                     <div>
                                         <p className="font-semibold text-gray-900">{item.product.name}</p>
-                                        <p className="text-sm text-gray-500">Qty: {item.quantity} x ${item.priceAtAddition.toFixed(2)}</p>
+          
+
+                                        <div className="flex items-center mt-1">
+                                            <input
+                                                type="number"
+                                                min="1"
+                                                value={item.quantity}
+                                                onChange={(e) => handleUpdateQuantity(item.product._id, parseInt(e.target.value))}
+                                                className="w-16 p-1 border border-gray-300 rounded-md text-center text-sm"
+                                            />
+                                            <span className="text-sm text-gray-500 ml-2">x ${item.priceAtAddition.toFixed(2)}</span>
+                                        </div>
                                     </div>
                                 </div>
                                 <div className="text-right flex flex-col items-end">
@@ -196,7 +94,6 @@ const CartView = ({ cart, fetchCart, setView, setAlert }) => {
                     </div>
                 </div>
 
-                {/* Cart Summary */}
                 <div className="lg:w-2/5 bg-gray-50 p-6 rounded-xl shadow-xl h-fit border border-gray-200">
                     <h3 className="text-2xl font-bold mb-4 text-gray-800 border-b pb-3">Order Summary</h3>
                     

@@ -1,5 +1,3 @@
-// backend/seed.js
-
 const mongoose = require('mongoose');
 require('dotenv').config();
 const Product = require('./models/Products.js');
@@ -18,10 +16,8 @@ const connectDB = async () => {
 const importData = async () => {
     await connectDB();
     try {
-        // Pehle existing data delete kar dete hain (safai)
         await Product.deleteMany();
 
-        // Phir naya data daal dete hain
         await Product.insertMany(products);
 
         console.log('Data Imported! ✅');
